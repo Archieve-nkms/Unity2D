@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Managers : MonoBehaviour
 {
+    static GameManager _game;
     static ScreenManager _screen;
 
+    public static GameManager Game => _game;
     public static ScreenManager Screen => _screen;
 
 
@@ -14,6 +16,7 @@ public class Managers : MonoBehaviour
         this.transform.name = $"@Managers";
 
         _screen = CreateManager<ScreenManager>();
+        _game = CreateManager<GameManager>();
 
         DontDestroyOnLoad(this);
     }

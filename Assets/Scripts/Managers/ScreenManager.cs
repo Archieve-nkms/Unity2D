@@ -9,7 +9,6 @@ public class ScreenManager : MonoBehaviour
 
     public Resolution Resolution => _resolution;
 
-
     private void Start()
     {
         SetResolution(_resolution, false);
@@ -35,7 +34,6 @@ public class ScreenManager : MonoBehaviour
         foreach(var sprite in spriteRenderers)
         {
             sprite.size.Scale(new Vector2(widthRatio, heightRatio));
-            Debug.Log($"Changed Sprite Size {sprite.gameObject.name}");
         }
     }
 }
