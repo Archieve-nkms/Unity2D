@@ -35,6 +35,10 @@ public class ScreenManager : MonoBehaviour
         {
             sprite.size.Scale(new Vector2(widthRatio, heightRatio));
         }
+
+        List<Boundary> boundaries = Resources.FindObjectsOfTypeAll<Boundary>().ToList();
+        foreach (var boundary in boundaries)
+            boundary.UpdateBoundary();
     }
 }
 

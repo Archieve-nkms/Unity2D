@@ -15,5 +15,5 @@ MonoBehaviour:
   _codeName: Enemy_Normal
   _displayName: Normal Enemy
   _hp: 3
-  _speed: 10
+  _speed: 5
   _weapon: {fileID: 11400000, guid: 150835774d3bac845bf53207e72e4c13, type: 2}

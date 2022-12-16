@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
             {
                 target.TakeDamage(_damage);
 
-                Destroy(gameObject);
+                this.gameObject.SetActive(false);
             }
 
         }
@@ -37,6 +37,6 @@ public class Projectile : MonoBehaviour
         _damage = damage;
 
         _spriteRenderer.color = owner.GetComponent<SpriteRenderer>().color;
-        this.gameObject.GetComponent<Rigidbody2D>().AddForce(direction * speed);
+        this.gameObject.GetComponent<Rigidbody2D>().AddForce(direction * speed, ForceMode2D.Impulse);
     }
 }

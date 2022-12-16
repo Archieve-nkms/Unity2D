@@ -6,9 +6,13 @@ public class Enemy : BaseUnit
 {
     [SerializeField]
     EnemyInfo _enemyInfo;
+    [SerializeField]
+    BaseMovement _movement;
 
     public string CodeName => _enemyInfo.CodeName;
     public string DisplayName => _enemyInfo.DisplayName;
+
+    Vector3 dir; 
 
     private void Awake()
     {
@@ -16,8 +20,15 @@ public class Enemy : BaseUnit
         _faction = Faction.Enemy;
     }
 
+    private void Start()
+    {
+        _movement.SetUp(transform, Managers.Game.Player.transform.position, _enemyInfo.Speed);
+    }
+
     private void Update()
     {
+        dir = (Managers.Game.Player.transform.position - transform.position).normalized;
+
         if (CanFire)
         {
             Vector3 dir = (Managers.Game.Player.transform.position - transform.position).normalized;
@@ -25,9 +36,14 @@ public class Enemy : BaseUnit
         }
     }
 
+    private void FixedUpdate()
+    {
+        _movement.SetDestination(Managers.Game.Player.transform.position);
+        _movement.Move();
+    }
 
     protected override void OnDead()
     {
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
 }

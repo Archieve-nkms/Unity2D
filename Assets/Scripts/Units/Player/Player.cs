@@ -16,13 +16,15 @@ public class Player : BaseUnit
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.Mouse0))
+
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             if(CanFire)
             {
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Vector3 dir = (mousePosition - this.transform.position).normalized;
-                _weapon.Fire(this, dir, out _nextFireTick);
+                Vector3 dir3D = (mousePosition - this.transform.position);
+                Vector2 direction = new Vector2(dir3D.x, dir3D.y).normalized;
+                _weapon.Fire(this, direction, out _nextFireTick);
             }
         }
     }

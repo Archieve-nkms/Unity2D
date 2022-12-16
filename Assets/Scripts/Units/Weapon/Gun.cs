@@ -11,7 +11,7 @@ public class Gun : BaseWeapon
     [SerializeField]
     int _projectileAmount;
     [SerializeField]
-    [Range(50, 200)]
+    [Range(1, 10)]
     float _projectileSpeed;
 
     public int ProjectileAmount => _projectileAmount;
@@ -21,7 +21,11 @@ public class Gun : BaseWeapon
     {
         nextFireTick = Time.time + _firerate;
 
-        GameObject go = Instantiate(_projectile, owner.transform.position, Quaternion.Euler(direction - owner.transform.position));
-        go.GetComponent<Projectile>().Push(owner, direction, _projectileSpeed, _damage);
+        GameObject bullet = Managers.Pool.GetInstance(_projectile);
+        bullet.transform.position = owner.transform.position;
+        bullet.transform.rotation = Quaternion.Euler(direction - owner.transform.position);
+        bullet.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+
+        bullet.GetComponent<Projectile>().Push(owner, direction, _projectileSpeed, _damage);
     }
 }
