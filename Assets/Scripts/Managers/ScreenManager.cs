@@ -8,6 +8,7 @@ public class ScreenManager : MonoBehaviour
     Resolution _resolution = new Resolution(1280,720);
 
     public Resolution Resolution => _resolution;
+    public Vector3 worldScreenPos => Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
 
     private void Start()
     {

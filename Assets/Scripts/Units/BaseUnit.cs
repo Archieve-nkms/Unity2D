@@ -12,7 +12,7 @@ public abstract class BaseUnit : MonoBehaviour, IDamageable
     public Faction Faction => _faction;
     public int CurrentHp => _currenthp;
     public bool IsDead => _currenthp <= 0;
-    public bool CanFire => Time.time >= _nextFireTick;
+    public bool WeaponReadyToFire => Time.time >= _nextFireTick;
 
     protected abstract void OnDead();
     
@@ -20,9 +20,9 @@ public abstract class BaseUnit : MonoBehaviour, IDamageable
     {
         _currenthp -= amount;
 
-        Debug.Log($"Got {amount} Damage");
-
         if (IsDead)
+        {
             OnDead();
+        }
     }
 }

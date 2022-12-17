@@ -12,6 +12,12 @@ public class Player : BaseUnit
     private void Awake()
     {
         _faction = Faction.Ally;
+        _currenthp = _maxHp;
+    }
+
+    private void OnEnable()
+    {
+        _currenthp = _maxHp;
     }
 
     private void Update()
@@ -19,7 +25,7 @@ public class Player : BaseUnit
 
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            if(CanFire)
+            if(WeaponReadyToFire)
             {
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector3 dir3D = (mousePosition - this.transform.position);
@@ -29,8 +35,15 @@ public class Player : BaseUnit
         }
     }
 
+    public override void TakeDamage(int amount)
+    {
+        base.TakeDamage(amount);
+        FindObjectOfType<TextRemainingHP>().UpdateText();
+    }
+
     protected override void OnDead()
     {
-        //TODO
+        gameObject.SetActive(false);
+        Managers.Game.EndGame();
     }
 }

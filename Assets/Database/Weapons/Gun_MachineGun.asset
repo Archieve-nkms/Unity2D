@@ -15,7 +15,7 @@ MonoBehaviour:
   _codeName: MACHINEGUN
   _displayName: Machine Gun
   _damage: 1
-  _firerate: 0.08
+  _firerate: 0.1
   _projectile: {fileID: 6213275062113666820, guid: 5656b9e9e8cd3ae4fa414004502ffef4, type: 3}
   _projectileAmount: 1
-  _projectileSpeed: 3.5
+  _projectileSpeed: 1.5

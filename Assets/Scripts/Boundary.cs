@@ -12,11 +12,14 @@ public class Boundary : MonoBehaviour
 
     private void Start()
     {
-        foreach (var projectile in Resources.FindObjectsOfTypeAll<Projectile>())
-            _affectObjects.Add(projectile.gameObject);
         foreach (var enemy in Resources.FindObjectsOfTypeAll<Enemy>())
-            _affectObjects.Add(enemy.gameObject);
-
+        {
+            AddAffectObject(enemy.gameObject);
+        }
+        foreach(var projectile in Resources.FindObjectsOfTypeAll<Projectile>())
+        {
+            AddAffectObject(projectile.gameObject);
+        }
         UpdateBoundary();
     }
 

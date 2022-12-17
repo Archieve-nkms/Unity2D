@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CircleMovement : BaseMovement
 {
-    [SerializeField]
     float _radius;
     float _additionalOffsetValue;
     float _offset;
@@ -14,9 +13,15 @@ public class CircleMovement : BaseMovement
         _additionalOffsetValue = Random.Range(1f, 50f);
     }
 
+    public override void SetValue(int value)
+    {
+        _radius = value;
+    }
+
     public override void Move()
     {
-        _offset = Time.time * _speed + _additionalOffsetValue;
-        _owner.position = _destPos + new Vector2(Mathf.Sin(_offset), Mathf.Cos(_offset)) * _radius;
+        _offset = Time.time * _speed/5 + _additionalOffsetValue;
+       // _owner.position = _destPos + new Vector3(Mathf.Sin(_offset), Mathf.Cos(_offset)) * _radius;
+        _ownerRigidbody.MovePosition(_destPos + new Vector3(Mathf.Sin(_offset), Mathf.Cos(_offset)) * _radius);
     }
 }

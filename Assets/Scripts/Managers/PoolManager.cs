@@ -63,4 +63,15 @@ public class PoolManager : MonoBehaviour
 
         go.SetActive(active);
     }
+
+    public void InactiveAll()
+    {
+        foreach(var pool in _pools)
+        {
+            foreach(var obj in pool.Value)
+            {
+                SetActive(obj, false);
+            }
+        }
+    }
 }

@@ -39,6 +39,6 @@ public class Controller : MonoBehaviour
 
     public void UpdateMovement()
     {
-        _rigidBody.MovePosition(_rigidBody.position + _movement * _speed * Time.fixedDeltaTime);
+        _rigidBody.MovePosition(_rigidBody.position + _movement * _speed * Time.deltaTime);
     }
 }
