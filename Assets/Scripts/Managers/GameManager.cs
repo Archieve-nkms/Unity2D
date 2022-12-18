@@ -10,9 +10,10 @@ public class GameManager : MonoBehaviour
 
     public Player Player => _player;
     public float StartTick => _startTick;
-    public float ElpasedTick => Time.time - _startTick;
-    public int ElapsedSeconds => (int)Mathf.Floor(ElpasedTick);
-    public int KillCount { get; set; }
+    public float ElapasedTick => Time.time - _startTick;
+    public int ElapsedSeconds => (int)Mathf.Floor(ElapasedTick);
+    public int ElapsedMinutes => (int)Mathf.Floor(ElapsedSeconds / 60);
+    public int KillCount { get { return _killCount; } set { _killCount = value; } }
 
     private void Awake()
     {

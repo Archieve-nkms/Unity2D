@@ -13,19 +13,33 @@ public class Gun : BaseWeapon
     [SerializeField]
     [Range(1, 10)]
     float _projectileSpeed;
+    [SerializeField]
+    [Range(0f, 0.5f)]
+    float _spreadAngle = 0.0f;
 
     public int ProjectileAmount => _projectileAmount;
     public float ProjectileSpeed => _projectileSpeed;
+
 
     public override void Fire(BaseUnit owner, Vector3 direction, out float nextFireTick)
     {
         nextFireTick = Time.time + _firerate;
 
-        GameObject bullet = Managers.Pool.GetInstance(_projectile);
-        bullet.transform.position = owner.transform.position;
-        bullet.transform.rotation = Quaternion.Euler(direction - owner.transform.position);
-        bullet.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        List<Projectile> projectiles = new List<Projectile>();
 
-        bullet.GetComponent<Projectile>().Push(owner, direction, _projectileSpeed, _damage);
+        for(int i = 0; i< _projectileAmount; i++)
+        {
+            GameObject bullet = Managers.Pool.GetInstance(_projectile);
+            bullet.transform.position = owner.transform.position;
+            bullet.transform.rotation = Quaternion.Euler(direction);
+            bullet.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+
+            float randomX = Random.Range(-_spreadAngle, _spreadAngle);
+            float randomY = Random.Range(-_spreadAngle, _spreadAngle);
+            Vector3 randomDir = new Vector3(randomX, randomY, 0);
+            Vector3 dir = direction + randomDir;
+
+            bullet.GetComponent<Projectile>().Push(owner, dir, _projectileSpeed, _damage);
+        }
     }
 }

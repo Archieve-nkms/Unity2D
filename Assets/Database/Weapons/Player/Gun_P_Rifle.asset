@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9bc43b94d76e57489a98976432319f4, type: 3}
-  m_Name: Gun_Pistol
+  m_Name: Gun_P_Rifle
   m_EditorClassIdentifier: 
-  _codeName: PISTOL
-  _displayName: Pistol
+  _codeName: PLAYER_RIFLE
+  _displayName: Rifle
   _damage: 1
-  _firerate: 1
+  _firerate: 0.3
   _projectile: {fileID: 6213275062113666820, guid: 5656b9e9e8cd3ae4fa414004502ffef4, type: 3}
   _projectileAmount: 1
-  _projectileSpeed: 2
+  _projectileSpeed: 7
+  _spreadAngle: 0.15

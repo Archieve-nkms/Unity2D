@@ -19,36 +19,21 @@ public class Enemy : BaseUnit
 
     private void OnEnable()
     {
-        _currenthp = _enemyInfo.HP;
-        _canMove = false;
-        _canFire = false;
-
-        Vector3 targetPos = Random.Range(0, 2) == 0 ? Managers.Game.Player.transform.position : transform.position;
-        List<BaseMovement> movements = GetComponents<BaseMovement>().ToList();
-        int randomValue = Random.Range(1, 7);
-
-        _movement = movements[Random.Range(0, movements.Count)];
-        _movement.SetUp(transform, targetPos, _enemyInfo.Speed, randomValue);
-
-        StartCoroutine(SleepForSeconds(_setupTime));
+        SetUp();
     }
 
     private void Awake()
     {
+        _animator = GetComponent<Animator>();
         _currenthp = _enemyInfo.HP;
         _faction = Faction.Enemy;
-    }
-
-    private void Start()
-    {
     }
 
     private void Update()
     {
         if (_canFire && WeaponReadyToFire)
         {
-            Vector3 dir = (Managers.Game.Player.transform.position - transform.position).normalized;
-            _enemyInfo.Weapon.Fire(this, dir, out _nextFireTick);
+            Fire();
         }
 
         if (_canMove)
@@ -60,8 +45,24 @@ public class Enemy : BaseUnit
 
     protected override void OnDead()
     {
+        _canFire = false;
+        _canMove = false;
         Managers.Game.KillCount++;
         gameObject.SetActive(false);
+
+    }
+
+    void SetUp()
+    {
+        Vector3 targetPos = Random.Range(0, 2) == 0 ? Managers.Game.Player.transform.position : transform.position;
+        List<BaseMovement> movements = GetComponents<BaseMovement>().ToList();
+        int randomValue = Random.Range(1, 7);
+
+        _movement = movements[Random.Range(0, movements.Count)];
+        _movement.SetUp(transform, targetPos, _enemyInfo.Speed, randomValue);
+        _currenthp = _enemyInfo.HP;
+
+        StartCoroutine(SleepForSeconds(_setupTime));
     }
 
     IEnumerator SleepForSeconds(float seconds)
@@ -71,5 +72,11 @@ public class Enemy : BaseUnit
         yield return new WaitForSeconds(seconds);
         _canMove = true;
         _canFire = true;
+    }
+
+    public override void Fire()
+    {
+        Vector3 dir = (Managers.Game.Player.transform.position - transform.position).normalized;
+        _enemyInfo.Weapon.Fire(this, dir, out _nextFireTick);
     }
 }

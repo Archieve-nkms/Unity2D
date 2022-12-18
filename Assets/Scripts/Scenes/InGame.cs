@@ -1,24 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InGame : MonoBehaviour
 {
-    Object _enemy;
-    Object _bullet;
+    List<Object> _enemies = new List<Object>();
+    List<Object> _projectiles;
 
     Coroutine _enemySpawner;
 
     private void Awake()
     {
-        _enemy = Resources.Load("Prefabs/Units/Enemies/Enemy");
-        _bullet = Resources.Load("Prefabs/Projectiles/Small Bullet");
+        _enemies = Resources.LoadAll("Prefabs/Units/Enemies").ToList();
+        _projectiles = Resources.LoadAll("Prefabs/Projectiles").ToList();
+        
     }
 
     private void Start()
     {
-        Managers.Pool.CreatePool(_enemy, 150);
-        Managers.Pool.CreatePool(_bullet, 1000);
+        foreach(Object enemy in _enemies)
+        {
+            Managers.Pool.CreatePool(enemy, 50);
+        }
+        foreach (Object projectiles in _projectiles)
+        {
+            Managers.Pool.CreatePool(projectiles, 500);
+        }
         Managers.Game.StartGame();
     }
 
@@ -29,10 +37,10 @@ public class InGame : MonoBehaviour
 
     public void StartEnemySpawner()
     {
-        _enemySpawner = StartCoroutine(EnemySpawner(3, 6));
+        _enemySpawner = StartCoroutine(EnemySpawner(5));
     }
 
-    IEnumerator EnemySpawner(int count, int seconds)
+    IEnumerator EnemySpawner(int seconds)
     {
         float width = Managers.Screen.worldScreenPos.x;
         float height = Managers.Screen.worldScreenPos.y;
@@ -42,11 +50,12 @@ public class InGame : MonoBehaviour
 
         while (true)
         {
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < Managers.Game.ElapsedMinutes + 3; i++)
             {
                 xPos = Random.Range(-width, width);
                 yPos = Random.Range(-height, height);
-                Managers.Unit.SpawnEnemy(_enemy, xPos, yPos);
+                Object enemy = _enemies[Random.Range(0, _enemies.Count)];
+                Managers.Unit.SpawnEnemy(enemy, xPos, yPos);
             }
 
             yield return new WaitForSeconds(seconds);

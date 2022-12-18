@@ -27,10 +27,7 @@ public class Player : BaseUnit
         {
             if(WeaponReadyToFire)
             {
-                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Vector3 dir3D = (mousePosition - this.transform.position);
-                Vector2 direction = new Vector2(dir3D.x, dir3D.y).normalized;
-                _weapon.Fire(this, direction, out _nextFireTick);
+                Fire();
             }
         }
     }
@@ -45,5 +42,13 @@ public class Player : BaseUnit
     {
         gameObject.SetActive(false);
         Managers.Game.EndGame();
+    }
+
+    public override void Fire()
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 dir3D = (mousePosition - this.transform.position);
+        Vector2 direction = new Vector2(dir3D.x, dir3D.y).normalized;
+        _weapon.Fire(this, direction, out _nextFireTick);
     }
 }

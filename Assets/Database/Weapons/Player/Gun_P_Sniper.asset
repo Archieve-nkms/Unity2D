@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9bc43b94d76e57489a98976432319f4, type: 3}
+  m_Name: Gun_P_Sniper
+  m_EditorClassIdentifier: 
+  _codeName: PLAYER_SNIPER
+  _displayName: Sniper Rifle
+  _damage: 5
+  _firerate: 1.5
+  _projectile: {fileID: 6213275062113666820, guid: 5656b9e9e8cd3ae4fa414004502ffef4, type: 3}
+  _projectileAmount: 1
+  _projectileSpeed: 10
+  _spreadAngle: 0

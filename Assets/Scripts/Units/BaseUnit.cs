@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseUnit : MonoBehaviour, IDamageable
+public abstract class BaseUnit : MonoBehaviour, IDamageable, IWeaponUsable
 {
     protected Faction _faction;
     protected int _currenthp;
 
     protected float _nextFireTick = 0f;
+    protected Animator _animator;
 
     public Faction Faction => _faction;
     public int CurrentHp => _currenthp;
@@ -25,4 +26,6 @@ public abstract class BaseUnit : MonoBehaviour, IDamageable
             OnDead();
         }
     }
+
+    public abstract void Fire();
 }
