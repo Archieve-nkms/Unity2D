@@ -30,6 +30,17 @@ public class InGame : MonoBehaviour
         Managers.Game.StartGame();
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!Managers.Game.IsGamePaused)
+                Managers.Game.PauseGame();
+            else
+                Managers.Game.ProceedGame();
+        }
+    }
+
     public void StopEnemySpawner()
     {
         StopCoroutine(_enemySpawner);

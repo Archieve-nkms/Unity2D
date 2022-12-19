@@ -13,6 +13,7 @@ public class ButtonInGame : MonoBehaviour
 
     public void BackToTitle()
     {
+        Managers.Game.ProceedGame();
         SceneManager.LoadScene("MainMenu");
     }
 }

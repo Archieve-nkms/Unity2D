@@ -25,9 +25,7 @@ public class Gun : BaseWeapon
     {
         nextFireTick = Time.time + _firerate;
 
-        List<Projectile> projectiles = new List<Projectile>();
-
-        for(int i = 0; i< _projectileAmount; i++)
+        for (int i = 0; i < _projectileAmount; i++)
         {
             GameObject bullet = Managers.Pool.GetInstance(_projectile);
             bullet.transform.position = owner.transform.position;

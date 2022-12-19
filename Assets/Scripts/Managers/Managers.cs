@@ -17,7 +17,7 @@ public class Managers : MonoBehaviour
 
     void Awake()
     {
-        if(FindObjectOfType<Managers>() != null)
+        if(FindObjectsOfType<Managers>().Length > 1)
             Destroy(this.gameObject);
 
         transform.name = $"@Managers";

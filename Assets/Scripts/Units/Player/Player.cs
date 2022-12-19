@@ -13,6 +13,7 @@ public class Player : BaseUnit
     {
         _faction = Faction.Ally;
         _currenthp = _maxHp;
+        _weapon = Managers.Game.SelectedWeapon;
     }
 
     private void OnEnable()

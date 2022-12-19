@@ -15,7 +15,7 @@ MonoBehaviour:
   _codeName: PLAYER_RIFLE
   _displayName: Rifle
   _damage: 1
-  _firerate: 0.3
+  _firerate: 0.25
   _projectile: {fileID: 6213275062113666820, guid: 5656b9e9e8cd3ae4fa414004502ffef4, type: 3}
   _projectileAmount: 1
   _projectileSpeed: 7
