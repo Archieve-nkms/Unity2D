@@ -3,7 +3,7 @@
 Arcade style game
 
 
-# InGame Image
+# InGame Images
 #### Title
 ![image](https://user-images.githubusercontent.com/77067031/208237009-18c836fa-b9c3-4671-9b6f-9786e6f7a62d.png)
 
